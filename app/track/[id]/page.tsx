@@ -4,8 +4,9 @@ import BinanceClient from './BinanceClient';
 // CHANGE IF CLOUDFLARE RESTARTS
 const FLASK_API = "https://beneficial-acrylic-fighter-saves.trycloudflare.com";
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const id = params.id;
+// Next.js 16 requires awaiting params
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
+  const { id } = await params;
   let imageUrl = 'https://public.bnbstatic.com/static/images/common/favicon.ico'; // Fallback image
   
   try {
@@ -39,7 +40,8 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
-export default function Page({ params }: { params: { id: string } }) {
-  // Pass the ID to the Client Component
-  return <BinanceClient id={params.id} />;
+// Next.js 16 requires awaiting params here too
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  return <BinanceClient id={id} />;
 }
