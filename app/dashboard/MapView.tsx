@@ -12,24 +12,40 @@ export default function MapView({ visitors }: { visitors: any[] }) {
     <MapContainer center={[0, 0]} zoom={2} style={{ height: '100%', width: '100%', borderRadius: '0.75rem', zIndex: 0 }} className="z-0">
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
       {visitors.map(v => {
-        const lat = v.gps_latitude || v.ip_latitude;
-        const lon = v.gps_longitude || v.ip_longitude;
-        if (lat && lon) {
-          const isGPS = v.gps_latitude != null;
-          return (
-            <Marker key={v.id} position={[lat, lon]} icon={isGPS ? redIcon : blueIcon}>
+        let markers = [];
+        
+        // 1. Explicitly check for Blue IP Marker (Fixes the 0 bug)
+        if (v.ip_latitude != null && v.ip_longitude != null) {
+          markers.push(
+            <Marker key={`${v.id}-ip`} position={[v.ip_latitude, v.ip_longitude]} icon={blueIcon}>
               <Popup>
                 <div className="p-1">
-                  <strong className={isGPS ? 'text-red-500' : 'text-blue-500'}>{isGPS ? 'Exact GPS' : 'IP Location'}</strong><br />
+                  <strong className="text-blue-500">IP Location</strong><br />
                   IP: {v.ip_address}<br />
                   Location: {v.ip_city}, {v.ip_country}<br />
+                  ISP: {v.ip_isp || 'N/A'}
+                </div>
+              </Popup>
+            </Marker>
+          );
+        }
+        
+        // 2. Explicitly check for Red GPS Marker
+        if (v.gps_latitude != null && v.gps_longitude != null) {
+          markers.push(
+            <Marker key={`${v.id}-gps`} position={[v.gps_latitude, v.gps_longitude]} icon={redIcon}>
+              <Popup>
+                <div className="p-1">
+                  <strong className="text-red-500">Exact GPS</strong><br />
+                  IP: {v.ip_address}<br />
                   Accuracy: {v.gps_accuracy ? `${v.gps_accuracy}m` : 'N/A'}
                 </div>
               </Popup>
             </Marker>
           );
         }
-        return null;
+        
+        return markers;
       })}
     </MapContainer>
   );
