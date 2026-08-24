@@ -4,7 +4,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
-// Custom SVG Icons for Map
 const blueIcon = L.divIcon({ html: `<svg width="32" height="32" viewBox="0 0 24 24" fill="#3b82f6" stroke="white" stroke-width="2"><path d="M12 0C7.6 0 4 3.6 4 8c0 5.4 7 12 8 13 1-1 8-7.6 8-13 0-4.4-3.6-8-8-8zm0 11c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"/></svg>`, iconSize: [32, 32], iconAnchor: [16, 32], popupAnchor: [0, -32] });
 const redIcon = L.divIcon({ html: `<svg width="32" height="32" viewBox="0 0 24 24" fill="#ef4444" stroke="white" stroke-width="2"><path d="M12 0C7.6 0 4 3.6 4 8c0 5.4 7 12 8 13 1-1 8-7.6 8-13 0-4.4-3.6-8-8-8zm0 11c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"/></svg>`, iconSize: [32, 32], iconAnchor: [16, 32], popupAnchor: [0, -32] });
 
