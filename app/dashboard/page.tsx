@@ -14,7 +14,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(false);
 
   // YOUR FLASK BACKEND URL (Change this to your Railway URL)
-  const FLASK_API = "http://127.0.0.1:5000";
+  const FLASK_API = "https://beneficial-acrylic-fighter-saves.trycloudflare.com";
 
   const fetchData = async () => {
     setLoading(true);
