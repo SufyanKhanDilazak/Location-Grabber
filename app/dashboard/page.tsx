@@ -181,7 +181,7 @@ export default function Dashboard() {
                 <p><span className="text-zinc-500">Visits:</span> <span className="text-zinc-200">{selectedVisitor.visit_count || 1}</span></p>
               </div>
 
-              {/* Browser Info */}
+                          {/* Browser Info */}
               <div className="bg-zinc-800/50 p-4 rounded-lg border border-zinc-700">
                 <h3 className="text-purple-400 font-semibold mb-3 border-b border-zinc-700 pb-2">Device & Browser</h3>
                 <p><span className="text-zinc-500">OS:</span> <span className="text-zinc-200">{selectedVisitor.operating_system || 'N/A'}</span></p>
@@ -190,6 +190,16 @@ export default function Dashboard() {
                 <p><span className="text-zinc-500">CPU Cores:</span> <span className="text-zinc-200">{selectedVisitor.cpu_cores || 'N/A'}</span></p>
                 <p><span className="text-zinc-500">RAM:</span> <span className="text-zinc-200">{selectedVisitor.device_memory ? selectedVisitor.device_memory + 'GB' : 'N/A'}</span></p>
                 <p><span className="text-zinc-500">Battery:</span> <span className="text-zinc-200">{selectedVisitor.battery_level ? Math.round(selectedVisitor.battery_level * 100) + '%' : 'N/A'}</span></p>
+                
+                {/* NEW: Exact Device Model Box */}
+                <div className="mt-3 pt-3 border-t border-zinc-700">
+                  <p className="text-zinc-500 text-xs mb-1.5">Exact Device Model (User Agent):</p>
+                  <div className="bg-zinc-950 p-2.5 rounded-md border border-zinc-800 max-h-24 overflow-y-auto">
+                    <p className="text-zinc-300 text-[10px] leading-relaxed break-all font-mono">
+                      {selectedVisitor.user_agent || 'N/A'}
+                    </p>
+                  </div>
+                </div>
               </div>
 
               {/* IP Location */}
